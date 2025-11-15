@@ -1,0 +1,103 @@
+html,
+body {
+  margin: 0;
+  padding: 5;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+#map {
+  width: 100%; /* Adjust width to your desired size */
+  height: 100%; /* Adjust height to your desired size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for effect */
+  border-radius: 8px; /* Optional: rounded corners */
+}
+
+#map svg {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#map circle,
+.legend > div {
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+}
+
+#map circle {
+  fill: var(--color);
+  pointer-events: auto;
+}
+
+header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+}
+
+#time-filter {
+  margin-left: auto; /* pushes slider to the right */
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.9rem;
+}
+
+#time-filter input[type="range"] {
+  width: 250px;
+}
+
+#time-display,
+#any-time {
+  display: block;      /* so it sits under the slider */
+  text-align: right;
+}
+
+#any-time {
+  color: #777;         /* lighter and italic for “(any time)” */
+  font-style: italic;
+}
+
+.legend {
+  display: flex;
+  gap: 2px;
+  margin-block: 1rem;
+  margin-inline: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 0.9rem;
+  background: white;
+  max-width: 500px; 
+}
+
+.legend > div {
+  flex: 1;
+  padding: 0.75rem 0.5rem; /* less horizontal padding → fits text */
+  background: var(--color);
+  color: white;
+  font-weight: 500;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  white-space: normal;  /* allow text to wrap */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
